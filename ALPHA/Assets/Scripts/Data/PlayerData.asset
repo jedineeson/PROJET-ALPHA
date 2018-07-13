@@ -11,18 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814c6bb0d2a26d04abbf660a5b9b1eae, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  m_JabCost: 5
+  m_StraightCost: 10
+  m_LeftKickCost: 15
+  m_RightKickCost: 15
   m_IsDashingTimer: 0.15
   m_ZMoveSpeed: 50
-  m_ZDashSpeed: 800
-  m_ZBloqueSpeed: 25
-  m_XMoveSpeed: 2.5
-  m_XDashSpeed: 15
-  m_XBloqueSpeed: 2.5
-  m_RecoveryTime: 4
-  m_DataLife: 300
+  m_ZDashSpeed: 3000
+  m_XMoveSpeed: 15
+  m_XDashSpeed: 45
+  m_InitLife: 100
   m_DashCost: 10
-  m_NormalAttackCost: 10
-  m_NormalAttackDamage: 20
-  m_RangeAttackCost: 15
-  m_RangeAttackDamage: 10
   m_DoubleTapDelay: 0.5

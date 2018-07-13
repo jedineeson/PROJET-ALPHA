@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
 	public int m_Player1;
 	public int m_Player2;
+	public int m_Winner;
 	
 	private static GameManager m_Instance;
 	//variable de moi même(on peux y accéder de partout avec LevelManager.Instance)
@@ -32,7 +33,6 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Je suis le premier, je reste.");
 			m_Instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
@@ -43,14 +43,17 @@ public class GameManager : MonoBehaviour
         if(ID == 1)
 		{
         	m_Player1 = choice;
-			Debug.Log("Player1" + choice);
 		}
 
 		if(ID == 2)
 		{
         	m_Player2 = choice;
-			Debug.Log("Player2" + choice);
 		}
+	}
+
+	public void SetWinner(int ID)
+	{
+		m_Winner = ID;
 	}
 }
 

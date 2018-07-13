@@ -21,19 +21,16 @@ public class LevelManager : MonoBehaviour
 		//Si instance != null, ça veux dire que je ne suis pas le premier, je me détruis car il ne peut y en avoir qu'un.
 		if(m_Instance != null)
 		{
-			Debug.Log("Je ne suis pas le seul je dois me détruire.");
 			//pour pas en avoir d'autre
 			Destroy(gameObject);
 		}
 		else
 		{
-			Debug.Log("Je suis le premier, je reste.");
 			m_Instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
 		//m_LoadingScreen.SetActive(false);
 	}
-
 
 	/*private void StartLoading()
 	{

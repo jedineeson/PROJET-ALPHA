@@ -200,6 +200,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 8016ca9eb1096c54b9458c32d65d6236, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6abde9df3ea10e741b4386783634963f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8016ca9eb1096c54b9458c32d65d6236, type: 3}
   m_IsPrefabParent: 0
@@ -441,6 +445,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 675211d00ce3d89489a4bba1f30b297a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 964d6a0ddc9abb54faaf4c01e186688b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 675211d00ce3d89489a4bba1f30b297a, type: 3}
   m_IsPrefabParent: 0
@@ -695,6 +703,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 9df6dc0603f1def48b04d39e8ac9dc32, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a79996e3d24e41b4ea934a8d79968267, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9df6dc0603f1def48b04d39e8ac9dc32, type: 3}
   m_IsPrefabParent: 0
@@ -1015,6 +1027,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 675211d00ce3d89489a4bba1f30b297a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 964d6a0ddc9abb54faaf4c01e186688b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 675211d00ce3d89489a4bba1f30b297a, type: 3}
   m_IsPrefabParent: 0
@@ -1097,6 +1113,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 9df6dc0603f1def48b04d39e8ac9dc32, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a79996e3d24e41b4ea934a8d79968267, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9df6dc0603f1def48b04d39e8ac9dc32, type: 3}
   m_IsPrefabParent: 0
@@ -1312,6 +1332,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 8016ca9eb1096c54b9458c32d65d6236, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6abde9df3ea10e741b4386783634963f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8016ca9eb1096c54b9458c32d65d6236, type: 3}
   m_IsPrefabParent: 0
@@ -1348,7 +1372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal_p2
-  m_VerticalAxis: Vertical_p2
+  m_VerticalAxis: VerticalMenu_p2
   m_SubmitButton: Jab_p2
   m_CancelButton: Straight_p2
   m_InputActionsPerSecond: 10

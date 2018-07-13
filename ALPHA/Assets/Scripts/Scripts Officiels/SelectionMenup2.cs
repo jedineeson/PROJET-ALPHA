@@ -44,7 +44,7 @@ public class SelectionMenup2 : MonoBehaviour
 		RightParasite.SetActive(false);
 		RightSkeleton.SetActive(false);
 		GameManager.Instance.SetPlayerCharacter(2, 1);
-		LevelManager.Instance.ChangeLevel("FightScene");
+		StartCoroutine(Fight());
 	}
 	
 	public void SetActiveParasite()
@@ -53,7 +53,7 @@ public class SelectionMenup2 : MonoBehaviour
 		RightParasite.SetActive(true);
 		RightSkeleton.SetActive(false);
 		GameManager.Instance.SetPlayerCharacter(2, 2);
-		LevelManager.Instance.ChangeLevel("FightScene");
+		StartCoroutine(Fight());
 	}
 
 	public void SetActiveSkeleton()
@@ -62,6 +62,12 @@ public class SelectionMenup2 : MonoBehaviour
 		RightParasite.SetActive(false);
 		RightSkeleton.SetActive(true);
 		GameManager.Instance.SetPlayerCharacter(2, 3);
+		StartCoroutine(Fight());
+	}
+
+	private IEnumerator Fight()
+	{
+		yield return new WaitForSeconds(1f);
 		LevelManager.Instance.ChangeLevel("FightScene");
 	}
 }

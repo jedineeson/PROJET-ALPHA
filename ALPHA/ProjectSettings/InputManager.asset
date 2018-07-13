@@ -154,8 +154,8 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: l
-    altNegativeButton: j
+    positiveButton: j
+    altNegativeButton: l
     altPositiveButton: 
     gravity: 0
     dead: 0.19
@@ -167,6 +167,22 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: Vertical_p2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: k
+    positiveButton: i
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 1
+    type: 0
+    axis: 1
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: VerticalMenu_p2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: i

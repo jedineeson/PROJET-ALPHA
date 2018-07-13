@@ -5,7 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/Data", fileName = "New Data", order = 1)]
 public class PlayerData : ScriptableObject
 {
-    
+    [SerializeField]
+	private float m_JabCost;
+	[SerializeField]
+	private float m_StraightCost;
+	[SerializeField]
+	private float m_LeftKickCost;
+	[SerializeField]
+	private float m_RightKickCost;
+
     [SerializeField]
     private float m_IsDashingTimer = 0.15f;
     //Vitesse maximum du déplacement du joueur
@@ -13,36 +21,54 @@ public class PlayerData : ScriptableObject
     private float m_ZMoveSpeed = 50f;
 	[SerializeField]
     private float m_ZDashSpeed = 800f;
-	[SerializeField]
-    private float m_ZBloqueSpeed = 25f;
+	//[SerializeField]
+    //private float m_ZBloqueSpeed = 25f;
 	//Vitesse maximum du déplacement du joueur
     [SerializeField]
     private float m_XMoveSpeed = 5f;
 	[SerializeField]
 	private float m_XDashSpeed = 15f;
-	[SerializeField]
-    private float m_XBloqueSpeed = 2.5f;
+	//[SerializeField]
+    //private float m_XBloqueSpeed = 2.5f;
 	//Vitesse qu'on récupère du stamina/vie
-    [SerializeField]
-    private float m_RecoveryTime = 4f;
+    //[SerializeField]
+    //private float m_RecoveryTime = 4f;
 	//Stamina/Vie maximum
     [SerializeField]
-	private float m_DataLife = 100f;
+	private float m_InitLife = 100f;
 	//Coût en stamina/vie d'un Dash
     [SerializeField]
     private float m_DashCost = 10f;
 	//Coût en stamina/vie d'une attack
-    [SerializeField]
+    /*[SerializeField]
     private float m_NormalAttackCost = 10f;
 	[SerializeField]
     private float m_NormalAttackDamage = 20f;
 	[SerializeField]
     private float m_RangeAttackCost = 10f;
 	[SerializeField]
-    private float m_RangeAttackDamage = 10f;
+    private float m_RangeAttackDamage = 10f;*/
 	//Temps entre le double tap
     [SerializeField]
     private float m_DoubleTapDelay = 0.5f;
+
+
+	public float JabCost
+	{
+		get{return m_JabCost;}
+	}	
+	public float StraightCost
+	{
+		get{return m_StraightCost;}
+	}	
+	public float LeftKickCost
+	{
+		get{return m_LeftKickCost;}
+	}	
+	public float RightKickCost
+	{
+		get{return m_RightKickCost;}
+	}
 
 	public float IsDashingTimer
 	{
@@ -59,10 +85,10 @@ public class PlayerData : ScriptableObject
 		get{return m_ZDashSpeed;}
 	}	
 
-	public float ZBloqueSpeed
+	/*public float ZBloqueSpeed
 	{
 		get{return m_ZBloqueSpeed;}
-	}
+	}*/
 
 	public float XMoveSpeed
 	{
@@ -74,19 +100,19 @@ public class PlayerData : ScriptableObject
 		get{return m_XDashSpeed;}
 	}	
 	
-	public float XBloqueSpeed
+	/*public float XBloqueSpeed
 	{
 		get{return m_XBloqueSpeed;}
-	}	
+	}*/	
 
-	public float RecoveryTime
+	/*public float RecoveryTime
 	{
 		get{return m_RecoveryTime;}
-	}
+	}*/
 
-	public float LifeData
+	public float InitLife
 	{
-		get{return m_DataLife;}
+		get{return m_InitLife;}
 	}
 
 	public float DashCost
@@ -94,7 +120,7 @@ public class PlayerData : ScriptableObject
 		get{return m_DashCost;}
 	}
 
-	public float NormalAttackCost
+	/*public float NormalAttackCost
 	{
 		get{return m_NormalAttackCost;}
 	}
@@ -112,7 +138,7 @@ public class PlayerData : ScriptableObject
 	public float RangeAttackDamage
 	{
 		get{return m_RangeAttackDamage;}
-	}
+	}*/
 
 	public float DoubleTapDelay
 	{
