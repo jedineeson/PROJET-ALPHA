@@ -15,11 +15,11 @@ MonoBehaviour:
   m_StraightCost: 10
   m_LeftKickCost: 15
   m_RightKickCost: 15
-  m_IsDashingTimer: 0.15
+  m_IsDashingTimer: 0.2
   m_ZMoveSpeed: 50
-  m_ZDashSpeed: 3000
-  m_XMoveSpeed: 15
-  m_XDashSpeed: 45
+  m_ZDashSpeed: 1400
+  m_XMoveSpeed: 5
+  m_XDashSpeed: 20
   m_InitLife: 100
   m_DashCost: 10
   m_DoubleTapDelay: 0.5

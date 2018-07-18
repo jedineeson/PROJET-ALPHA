@@ -68,6 +68,6 @@ public class SelectionMenup2 : MonoBehaviour
 	private IEnumerator Fight()
 	{
 		yield return new WaitForSeconds(1f);
-		LevelManager.Instance.ChangeLevel("FightScene");
+		LevelManager.Instance.ChangeLevel("Game");
 	}
 }

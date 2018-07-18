@@ -110,11 +110,12 @@ public class PlayerController : MonoBehaviour
 
         m_ActualSpeedX = m_XMoveSpeed;
         m_ActualSpeedZ = m_ZMoveSpeed;
+
     }
 
     void Update()
     {
-        if(m_Ennemy != null)
+        if (m_Ennemy != null)
         {
             //vecteur pour position de mon ennemie = position du transform de mon ennemie
             m_EnnemyPosition = m_Ennemy.transform.position;
@@ -125,6 +126,18 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, (Quaternion.LookRotation(m_EnnemyPosition - transform.position)), Time.deltaTime * 2);
         }
 
+        /*if (m_IsBlockin)
+        {
+            m_ActualSpeedX = m_XMoveSpeed * 0.5f;
+            m_ActualSpeedZ = m_ZMoveSpeed * 0.5f;
+            m_TapCountX = 0;
+            m_TapCountZ = 0;
+        }
+        else
+        {*/
+        m_ActualSpeedX = m_XMoveSpeed;
+        m_ActualSpeedZ = m_ZMoveSpeed;
+        //}
 
         if (m_Life < m_LifeMax)
         {
@@ -136,7 +149,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_Life += Time.deltaTime * 4;
             }
-            if(m_Action != null)
+            if (m_Action != null)
             {
                 m_Action(m_Life, m_LifeMax, m_PlayerID);
             }
@@ -144,8 +157,8 @@ public class PlayerController : MonoBehaviour
         else if (m_Life > m_LifeMax)
         {
             m_Life = m_LifeMax;
-            
-            if(m_Action != null)
+
+            if (m_Action != null)
             {
                 m_Action(m_Life, m_LifeMax, m_PlayerID);
             }
@@ -158,33 +171,33 @@ public class PlayerController : MonoBehaviour
                 m_Animator.SetBool("Bloc", true);
                 m_IsBlockin = true;
             }
-            if (Input.GetButtonUp("Bloc_p" + m_PlayerID))
+            else if (Input.GetButtonUp("Bloc_p" + m_PlayerID))
             {
                 m_Animator.SetBool("Bloc", false);
                 m_IsBlockin = false;
             }
-            else if (Input.GetButtonDown("Jab_p" + m_PlayerID))
+            else if (Input.GetButtonDown("Jab_p" + m_PlayerID) && m_Life > m_JabCost + 1)
             {
                 m_Life -= m_JabCost;
-                m_Animator.Play("Jab");
+                m_Animator.SetTrigger("Jab");
                 m_LeftHandCollider.enabled = true;
                 m_RightHandCollider.enabled = false;
                 m_LeftKickCollider.enabled = false;
                 m_RightKickCollider.enabled = false;
             }
-            else if (Input.GetButtonDown("Straight_p" + m_PlayerID))
+            else if (Input.GetButtonDown("Straight_p" + m_PlayerID) && m_Life > m_StraightCost + 1)
             {
                 m_Life -= m_StraightCost;
-                m_Animator.Play("Straight");
+                m_Animator.SetTrigger("Straight");
                 m_LeftHandCollider.enabled = false;
                 m_RightHandCollider.enabled = true;
                 m_LeftKickCollider.enabled = false;
                 m_RightKickCollider.enabled = false;
             }
-            else if (Input.GetButtonDown("LeftKick_p" + m_PlayerID))
+            else if (Input.GetButtonDown("LeftKick_p" + m_PlayerID) && m_Life > m_LeftKickCost + 1)
             {
                 m_Life -= m_LeftKickCost;
-                m_Animator.Play("LeftKick");
+                m_Animator.SetTrigger("LeftKick");
                 m_LeftHandCollider.enabled = false;
                 m_RightHandCollider.enabled = false;
                 m_LeftKickCollider.enabled = true;
@@ -193,13 +206,13 @@ public class PlayerController : MonoBehaviour
             else if (Input.GetButtonDown("RightKick_p" + m_PlayerID))
             {
                 m_Life -= m_RightKickCost;
-                m_Animator.Play("RightKick");
+                m_Animator.SetTrigger("RightKick");
                 m_LeftHandCollider.enabled = false;
                 m_RightHandCollider.enabled = false;
                 m_LeftKickCollider.enabled = false;
                 m_RightKickCollider.enabled = true;
             }
-            else if (Input.GetButtonDown("BlocBreaker_p" + m_PlayerID))
+            else if (Input.GetButtonDown("BlocBreaker_p" + m_PlayerID) && m_Life > m_RightKickCost + 1)
             {
                 m_Animator.Play("BlocBreaker");
             }
@@ -212,14 +225,14 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
-            
+
             CheckInputAxis();
             CheckDoubletapZ();
-            m_rayPos.y = transform.position.y + 2.5f;
+            m_rayPos.y = transform.position.y + 1f;
             m_rayPos.x = transform.position.x;
-            m_rayPos.z = transform.position.z;            
+            m_rayPos.z = transform.position.z;
 
-            if (Physics.Raycast(m_rayPos, transform.forward, 4f))
+            if (Physics.Raycast(m_rayPos, transform.forward, 0.8f))
             {
                 m_InputX = Mathf.Clamp(m_InputX, -1f, 0f);
                 Debug.DrawRay(m_rayPos, transform.forward, Color.green);
@@ -228,21 +241,21 @@ public class PlayerController : MonoBehaviour
             {
                 CheckDoubletapX();
                 Debug.DrawRay(m_rayPos, transform.forward, Color.red);
-            }            
+            }
         }
 
         if (m_Life <= 0)
         {
-            if(m_PlayerID == 1)
+            if (m_PlayerID == 1)
             {
                 GameManager.Instance.SetWinner(2);
             }
-            else if(m_PlayerID == 2)
+            else if (m_PlayerID == 2)
             {
                 GameManager.Instance.SetWinner(1);
-            } 
+            }
 
-            LevelManager.Instance.ChangeLevel("WinnerScreen");                                   
+            LevelManager.Instance.ChangeLevel("WinnerScreen");
         }
     }
 
@@ -250,7 +263,7 @@ public class PlayerController : MonoBehaviour
     {
         m_MoveDir = (m_InputX * transform.forward);
         m_MoveDir *= m_ActualSpeedX;
-        if(m_Player != null)
+        if (m_Player != null)
         {
             m_MoveDir.y = m_Player.velocity.y;
             m_Player.velocity = m_MoveDir;
@@ -265,11 +278,11 @@ public class PlayerController : MonoBehaviour
         {
             if (m_IsBlockin)
             {
-                Damage(5, 1);                            
+                Damage(5, 1);
             }
             else
             {
-                Damage(10, 5); 
+                Damage(10, 5);
             }
             Debug.Log("vie " + m_PlayerID + " : " + m_Life);
         }
@@ -364,13 +377,13 @@ public class PlayerController : MonoBehaviour
         m_RelativeZDashSpeed = m_ZDashSpeed / m_Distance;
         m_ActualSpeedX = m_XDashSpeed;
         Damage(5, 1);
-        if(m_InputX == 1)
+        if (m_InputX == 1)
         {
-            m_Animator.Play("StepFront");
+            //m_Animator.Play("StepFront");
         }
-        else if(m_InputX == -1)
+        else if (m_InputX == -1)
         {
-            m_Animator.Play("StepBack");
+            //m_Animator.Play("StepBack");
         }
         m_IsDashingHorizontal = true;
         yield return new WaitForSeconds(m_IsDashingTimer);
@@ -380,14 +393,16 @@ public class PlayerController : MonoBehaviour
     //Déroulement du dash vertical
     private IEnumerator DashingVertical()
     {
+        Debug.Log("Dash");
         //Distance entre les 2 joueurs
         m_Distance = Vector3.Distance(m_EnnemyPosition, transform.position);
         //Réduit la distance du dash relativement à la distance entre les 2 joueurs
         m_RelativeZDashSpeed = m_ZDashSpeed / m_Distance;
         m_ActualSpeedZ = m_RelativeZDashSpeed;
-        Damage(5, 1); 
+        Damage(5, 1);
         m_IsDashingHorizontal = true;
         yield return new WaitForSeconds(m_IsDashingTimer);
+        Debug.Log("DashOver");
         m_IsDashingHorizontal = false;
         m_ActualSpeedZ = m_ZMoveSpeed;
     }
