@@ -20,6 +20,6 @@ MonoBehaviour:
   m_ZDashSpeed: 1400
   m_XMoveSpeed: 5
   m_XDashSpeed: 20
-  m_InitLife: 100
+  m_InitLife: 200
   m_DashCost: 10
   m_DoubleTapDelay: 0.5

@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     private BoxCollider m_LeftKickCollider;
     [SerializeField]
     private BoxCollider m_RightKickCollider;
+    [SerializeField]
+    private BoxCollider m_RightLegCollider;
     //Je dash combien de temps
     private float m_IsDashingTimer;
     //Vitesse maximum du déplacement du joueur
@@ -72,7 +74,9 @@ public class PlayerController : MonoBehaviour
     private float m_StraightCost;
     private float m_LeftKickCost;
     private float m_RightKickCost;
-
+    private bool m_IsCrouch;
+    private float m_IsLegSweep;
+    private AttackEnum m_LastAttack;
     //vecteur pour direction de mon personnage
     private Vector3 m_MoveDir = new Vector3();
     //vecteur pour position de mon ennemie
@@ -110,11 +114,19 @@ public class PlayerController : MonoBehaviour
 
         m_ActualSpeedX = m_XMoveSpeed;
         m_ActualSpeedZ = m_ZMoveSpeed;
-
     }
 
     void Update()
     {
+        if (m_IsLegSweep > 0)
+        {
+            m_IsLegSweep -= Time.deltaTime;
+            if (m_IsLegSweep <= 0)
+            {
+                Debug.Log("LegSweepOver");
+            }
+        }
+
         if (m_Ennemy != null)
         {
             //vecteur pour position de mon ennemie = position du transform de mon ennemie
@@ -126,7 +138,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, (Quaternion.LookRotation(m_EnnemyPosition - transform.position)), Time.deltaTime * 2);
         }
 
-        /*if (m_IsBlockin)
+        if (m_IsBlockin)
         {
             m_ActualSpeedX = m_XMoveSpeed * 0.5f;
             m_ActualSpeedZ = m_ZMoveSpeed * 0.5f;
@@ -134,10 +146,10 @@ public class PlayerController : MonoBehaviour
             m_TapCountZ = 0;
         }
         else
-        {*/
+        {
         m_ActualSpeedX = m_XMoveSpeed;
         m_ActualSpeedZ = m_ZMoveSpeed;
-        //}
+        }
 
         if (m_Life < m_LifeMax)
         {
@@ -166,53 +178,95 @@ public class PlayerController : MonoBehaviour
 
         if (m_CanControl)
         {
-            if (Input.GetButton("Bloc_p" + m_PlayerID))
+            if (Input.GetButton("Crouch_p" + m_PlayerID) && !m_IsBlockin)
+            {
+                m_IsCrouch = true;
+                m_Animator.SetBool("Crouch", true);
+            }
+            else
+            {
+                m_Animator.SetBool("Crouch", false);
+                m_IsCrouch = false;
+            }
+            if (Input.GetButton("Bloc_p" + m_PlayerID) && !m_IsCrouch)
             {
                 m_Animator.SetBool("Bloc", true);
                 m_IsBlockin = true;
             }
-            else if (Input.GetButtonUp("Bloc_p" + m_PlayerID))
+            else
             {
                 m_Animator.SetBool("Bloc", false);
                 m_IsBlockin = false;
             }
-            else if (Input.GetButtonDown("Jab_p" + m_PlayerID) && m_Life > m_JabCost + 1)
+
+            if (Input.GetButtonDown("Jab_p" + m_PlayerID) && m_Life > m_JabCost + 1)
             {
-                m_Life -= m_JabCost;
-                m_Animator.SetTrigger("Jab");
-                m_LeftHandCollider.enabled = true;
-                m_RightHandCollider.enabled = false;
-                m_LeftKickCollider.enabled = false;
-                m_RightKickCollider.enabled = false;
+                if (!m_IsCrouch)
+                {
+                    m_Life -= m_JabCost;
+                    m_Animator.SetTrigger("Jab");
+                    m_LeftHandCollider.enabled = true;
+                    m_RightHandCollider.enabled = false;
+                    m_LeftKickCollider.enabled = false;
+                    m_RightKickCollider.enabled = false;
+                    m_RightLegCollider.enabled = false;
+                    m_LastAttack = AttackEnum.Jab;
+                }
             }
             else if (Input.GetButtonDown("Straight_p" + m_PlayerID) && m_Life > m_StraightCost + 1)
             {
-                m_Life -= m_StraightCost;
-                m_Animator.SetTrigger("Straight");
-                m_LeftHandCollider.enabled = false;
-                m_RightHandCollider.enabled = true;
-                m_LeftKickCollider.enabled = false;
-                m_RightKickCollider.enabled = false;
+                if (!m_IsCrouch)
+                {
+                    m_Life -= m_StraightCost;
+                    m_Animator.SetTrigger("Straight");
+                    m_LeftHandCollider.enabled = false;
+                    m_RightHandCollider.enabled = true;
+                    m_LeftKickCollider.enabled = false;
+                    m_RightKickCollider.enabled = false;
+                    m_RightLegCollider.enabled = false;
+                    m_LastAttack = AttackEnum.Straight;                    
+                }
             }
             else if (Input.GetButtonDown("LeftKick_p" + m_PlayerID) && m_Life > m_LeftKickCost + 1)
             {
-                m_Life -= m_LeftKickCost;
-                m_Animator.SetTrigger("LeftKick");
-                m_LeftHandCollider.enabled = false;
-                m_RightHandCollider.enabled = false;
-                m_LeftKickCollider.enabled = true;
-                m_RightKickCollider.enabled = false;
+                if (!m_IsCrouch)
+                {
+                    m_Life -= m_LeftKickCost;
+                    m_Animator.SetTrigger("LeftKick");
+                    m_LeftHandCollider.enabled = false;
+                    m_RightHandCollider.enabled = false;
+                    m_LeftKickCollider.enabled = true;
+                    m_RightLegCollider.enabled = false;
+                    m_RightKickCollider.enabled = false;
+                    m_LastAttack = AttackEnum.LeftKick;
+                }
             }
-            else if (Input.GetButtonDown("RightKick_p" + m_PlayerID))
+            else if (Input.GetButtonDown("RightKick_p" + m_PlayerID) && m_Life > m_RightKickCost + 1)
             {
-                m_Life -= m_RightKickCost;
-                m_Animator.SetTrigger("RightKick");
-                m_LeftHandCollider.enabled = false;
-                m_RightHandCollider.enabled = false;
-                m_LeftKickCollider.enabled = false;
-                m_RightKickCollider.enabled = true;
+                if (!m_IsCrouch)
+                {
+                    m_Life -= m_RightKickCost;
+                    m_Animator.SetTrigger("RightKick");
+                    m_LeftHandCollider.enabled = false;
+                    m_RightHandCollider.enabled = false;
+                    m_LeftKickCollider.enabled = false;
+                    m_RightLegCollider.enabled = false;
+                    m_RightKickCollider.enabled = true;
+                    m_LastAttack = AttackEnum.RightKick;
+                }
+                else
+                {
+                    m_Life -= m_RightKickCost;
+                    m_Animator.SetTrigger("LegSweep");
+                    m_LeftHandCollider.enabled = false;
+                    m_RightHandCollider.enabled = false;
+                    m_LeftKickCollider.enabled = false;
+                    m_RightLegCollider.enabled = true;
+                    m_RightKickCollider.enabled = true;
+                    m_LastAttack = AttackEnum.LegSweep;
+                }
             }
-            else if (Input.GetButtonDown("BlocBreaker_p" + m_PlayerID) && m_Life > m_RightKickCost + 1)
+            else if (Input.GetButtonDown("BlocBreaker_p" + m_PlayerID))
             {
                 m_Animator.Play("BlocBreaker");
             }
@@ -226,21 +280,24 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            CheckInputAxis();
-            CheckDoubletapZ();
-            m_rayPos.y = transform.position.y + 1f;
-            m_rayPos.x = transform.position.x;
-            m_rayPos.z = transform.position.z;
+            if (!m_IsCrouch)
+            {
+                CheckInputAxis();
+                CheckDoubletapZ();
+                m_rayPos.y = transform.position.y + 1f;
+                m_rayPos.x = transform.position.x;
+                m_rayPos.z = transform.position.z;
 
-            if (Physics.Raycast(m_rayPos, transform.forward, 0.8f))
-            {
-                m_InputX = Mathf.Clamp(m_InputX, -1f, 0f);
-                Debug.DrawRay(m_rayPos, transform.forward, Color.green);
-            }
-            else
-            {
-                CheckDoubletapX();
-                Debug.DrawRay(m_rayPos, transform.forward, Color.red);
+                if (Physics.Raycast(m_rayPos, transform.forward, 1f))
+                {
+                    m_InputX = Mathf.Clamp(m_InputX, -1f, 0f);
+                    Debug.DrawRay(m_rayPos, transform.forward, Color.green);
+                }
+                else
+                {
+                    CheckDoubletapX();
+                    Debug.DrawRay(m_rayPos, transform.forward, Color.red);
+                }
             }
         }
 
@@ -276,15 +333,44 @@ public class PlayerController : MonoBehaviour
     {
         if (aOther.gameObject.layer == LayerMask.NameToLayer("Hit"))
         {
-            if (m_IsBlockin)
+            if (m_PlayerID == 1)
             {
-                Damage(5, 1);
+                if (SetFightScene.Instance.Player2.GetComponent<PlayerController>().m_LastAttack == AttackEnum.LegSweep)
+                {
+                    m_Animator.SetTrigger("Fall");
+                    Damage(10, 5);
+                }
+                else if (!m_IsBlockin)
+                {
+                    m_Animator.SetTrigger("HeadHit");
+                    Damage(10, 5);
+                }
+                else if (m_IsBlockin)
+                {
+                    Damage(5, 1);
+                }
+
             }
             else
             {
-                Damage(10, 5);
+                if (SetFightScene.Instance.Player1.GetComponent<PlayerController>().m_LastAttack == AttackEnum.LegSweep)
+                {
+                    m_Animator.SetTrigger("Fall");
+                    Damage(10, 5);
+                }
+                else if (!m_IsBlockin)
+                {
+                    m_Animator.SetTrigger("HeadHit");
+                    Damage(10, 5);
+                }
+                else if (m_IsBlockin)
+                {
+                    Damage(5, 1);
+                }
             }
-            Debug.Log("vie " + m_PlayerID + " : " + m_Life);
+
+
+            //Debug.Log("vie " + m_PlayerID + " : " + m_Life);
         }
     }
 
@@ -360,6 +446,8 @@ public class PlayerController : MonoBehaviour
         m_RightHandCollider.enabled = false;
         m_LeftKickCollider.enabled = false;
         m_RightKickCollider.enabled = false;
+        m_RightLegCollider.enabled = false;
+        
     }
 
     private void Damage(float life, float lifeMax)

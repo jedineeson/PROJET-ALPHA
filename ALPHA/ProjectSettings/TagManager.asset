@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-  - Hit
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Lighting Channel A
+  - Lighting Channel B
+  - Lighting Channel C
+  - LensFlares
+  - LightingHidden
+  - ParticleCollision
+  - VisorFX
   - 
   - 
   - 

@@ -215,6 +215,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4311550933169556}
+  - component: {fileID: 65618257252353612}
   m_Layer: 9
   m_Name: RightLeg
   m_TagString: Untagged
@@ -546,7 +547,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4876163316258294}
-  m_Layer: 9
+  - component: {fileID: 136758847888531886}
+  m_Layer: 8
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,8 +836,7 @@ GameObject:
   - component: {fileID: 95636325540623716}
   - component: {fileID: 114473688413848880}
   - component: {fileID: 54386288011860310}
-  - component: {fileID: 136143424105804936}
-  - component: {fileID: 136091075294382136}
+  - component: {fileID: 136833877902305662}
   m_Layer: 8
   m_Name: pumpkinhulk Scale
   m_TagString: Untagged
@@ -1547,7 +1548,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1722877419622092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 222.6, y: 104.4, z: 170.6}
+  m_LocalPosition: {x: -0.42965698, y: 138.1432, z: -0.22233582}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4876163316258294}
@@ -2039,6 +2040,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.30404994, y: 0.13220154, z: 0.24442501}
   m_Center: {x: -0.083318956, y: -0.0011007668, z: -0.0026931285}
+--- !u!65 &65618257252353612
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1120925726978652}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24380499, y: 0.78843975, z: 0.2993746}
+  m_Center: {x: 0.009557393, y: -0.105780065, z: -0.026621357}
 --- !u!65 &65809136262215598
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2090,20 +2103,21 @@ MonoBehaviour:
   m_RightHandCollider: {fileID: 65324270210453736}
   m_LeftKickCollider: {fileID: 65135770446253908}
   m_RightKickCollider: {fileID: 65809136262215598}
---- !u!136 &136091075294382136
+  m_RightLegCollider: {fileID: 65618257252353612}
+--- !u!136 &136758847888531886
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1722877419622092}
+  m_GameObject: {fileID: 1498400846300030}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.36405334
-  m_Height: 2.0608907
+  m_Radius: 0.35205063
+  m_Height: 2.0334167
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0822963, z: -0.056747437}
---- !u!136 &136143424105804936
+  m_Center: {x: 0.0037026703, y: 0.005752802, z: -2.3407133e-18}
+--- !u!136 &136833877902305662
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2112,10 +2126,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.32228547
-  m_Height: 2.070617
+  m_Radius: 0.18401314
+  m_Height: 2.1565857
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0499386, z: -0.05969696}
+  m_Center: {x: 0.027510539, y: 1.0460358, z: -0.016840503}
 --- !u!137 &137539858338531932
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

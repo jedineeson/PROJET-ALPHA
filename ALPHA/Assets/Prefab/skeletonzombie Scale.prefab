@@ -290,7 +290,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4803732181049632}
-  m_Layer: 9
+  - component: {fileID: 136366440545086022}
+  m_Layer: 8
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,8 +700,7 @@ GameObject:
   - component: {fileID: 95597838402487072}
   - component: {fileID: 114872984307876654}
   - component: {fileID: 54542345508048828}
-  - component: {fileID: 136528715541637784}
-  - component: {fileID: 136508771876129912}
+  - component: {fileID: 136706799125129758}
   m_Layer: 8
   m_Name: skeletonzombie Scale
   m_TagString: Untagged
@@ -944,6 +944,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4673483493320586}
+  - component: {fileID: 65194427669145222}
   m_Layer: 9
   m_Name: RightUpLeg
   m_TagString: Untagged
@@ -1194,7 +1195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1647058509048876}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 213.4, y: 104.4, z: 223.5}
+  m_LocalPosition: {x: 0.5894928, y: 138.1432, z: 0.97306824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4803732181049632}
@@ -2013,6 +2014,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.20749463, y: 0.21666563, z: 0.41066268}
   m_Center: {x: 0.047279954, y: -0.035692003, z: 0.09479061}
+--- !u!65 &65194427669145222
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907462449969442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1766355, y: 0.7987163, z: 0.33056656}
+  m_Center: {x: 0.034789644, y: -0.52188796, z: 0.017401502}
 --- !u!65 &65454299150387890
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2088,20 +2101,21 @@ MonoBehaviour:
   m_RightHandCollider: {fileID: 65454299150387890}
   m_LeftKickCollider: {fileID: 65739520360935646}
   m_RightKickCollider: {fileID: 65121824467887548}
---- !u!136 &136508771876129912
+  m_RightLegCollider: {fileID: 65194427669145222}
+--- !u!136 &136366440545086022
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1647058509048876}
+  m_GameObject: {fileID: 1273085003096210}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.29201204
-  m_Height: 2.0584962
+  m_Radius: 0.23338372
+  m_Height: 2.0576477
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0738602, z: -0.0037704469}
---- !u!136 &136528715541637784
+  m_Center: {x: 0.010859907, y: -0.14233375, z: -0.02550292}
+--- !u!136 &136706799125129758
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2110,10 +2124,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.24517593
-  m_Height: 2.0634255
+  m_Radius: 0.14244926
+  m_Height: 2.0411377
   m_Direction: 1
-  m_Center: {x: 0.009672547, y: 1.0332783, z: -0.0032356263}
+  m_Center: {x: 0, y: 1.0049896, z: 0.008526206}
 --- !u!137 &137183044706385790
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
